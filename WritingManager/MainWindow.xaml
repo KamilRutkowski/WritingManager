@@ -1,12 +1,30 @@
-﻿<Window x:Class="WritingManager.MainWindow"
+﻿<Window x:Name="_MainWindow" x:Class="WritingManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WritingManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="1131" Width="1839.5">
+    <Grid x:Name="_mainWindowGrid" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ToolBar x:Name="_mainProgramToolbar" Grid.Row="0" MinHeight="30"></ToolBar>
+        <Grid x:Name="_grid" Margin="0" Background="#FFFFC7C7" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ToolBar x:Name="_leftPanelToolbar" MinHeight="30" Grid.Column="0" Grid.Row="0"/>
+            <ToolBar x:Name="_rightPanelToolbar" MinHeight="30" Grid.Column="1" Grid.Row="0"/>
+            <Grid x:Name="_leftPanel" Margin="0" Background="#FF973030" Grid.Row="1"/>
+            <Grid x:Name="_rightPanel" Margin="0" Background="#FFE67171" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
     </Grid>
 </Window>
