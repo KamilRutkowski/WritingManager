@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace WritingManager.Module
 {
-    public class ModuleInfoBase
+    public class ModuleInfoBase<PanelType>
     {
         public virtual void Registration(ContainerBuilder container)
         {
             
         }
+
+        public virtual Type MainControllerType { get; protected set; }
     }
 }

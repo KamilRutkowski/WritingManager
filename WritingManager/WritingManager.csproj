@@ -65,9 +65,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ApplicationConfiguration.cs" />
-    <Compile Include="ApplicationController.cs" />
-    <Compile Include="IApplicationView.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -101,6 +98,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WritingManager.Controller\WritingManager.Controller.csproj">
+      <Project>{5A67CC64-3BFF-42E1-ADBB-4FCD068E3FC6}</Project>
+      <Name>WritingManager.Controller</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WritingManager.Module.TextWriter\WritingManager.Module.TextWriter.csproj">
       <Project>{E8689C23-C4F9-4850-BB5D-904BF1F32049}</Project>
       <Name>WritingManager.Module.TextWriter</Name>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WritingManager.Controller;
 using WritingManager.Module.TextWriter;
 
 namespace WritingManager
@@ -27,15 +28,14 @@ namespace WritingManager
         {
             InitializeComponent();
             _controller = new ApplicationController<Panel>(this);
-            //TextWriterViewWPF twView = new TextWriterViewWPF();
-            //TextWriterController<Panel> controller = new TextWriterController<Panel>(twView, new TextWriterDatabaseConnection());
-            //controller.ShowOnPanel(_leftPanel);
         }
 
         public List<(string, List<(string, Action)>)> MainToolbarOptions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<(string, Action)> LeftModules { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<(string, Action)> RightModules { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Panel LeftPanel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Panel RightPanel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<(string, Action, bool)> LeftModules { get => _leftModules; set => _leftModules = value; }
+        private List<(string, Action, bool)> _leftModules = new List<(string, Action, bool)>();
+        public List<(string, Action, bool)> RightModules { get => _rightModules; set => _rightModules = value; }
+        private List<(string, Action, bool)> _rightModules = new List<(string, Action, bool)>();
+        public Panel LeftPanel { get => _leftPanel;}
+        public Panel RightPanel { get => _rightPanel;}
     }
 }

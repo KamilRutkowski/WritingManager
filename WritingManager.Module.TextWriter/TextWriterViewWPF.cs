@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WritingManager.Module;
 
 namespace WritingManager.Module.TextWriter
 {
@@ -76,29 +77,6 @@ namespace WritingManager.Module.TextWriter
         public override void Hide()
         {
             Panel.Children.Clear();
-        }
-    }
-
-    internal class Command : System.Windows.Input.ICommand
-    {
-        public event EventHandler CanExecuteChanged;
-
-        private Action _action;
-
-        public Command(Action action)
-        {
-            _action = action;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            if(_action != null)
-                _action.Invoke();
         }
     }
 }

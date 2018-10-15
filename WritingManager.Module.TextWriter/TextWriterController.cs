@@ -9,12 +9,13 @@ namespace WritingManager.Module.TextWriter
 {
     public class TextWriterController<PanelType> : ControllerBase<PanelType>
     {
-        public override string ModuleName { get; protected set; } = "Text writer";
+        
         private TextWriterViewBase<PanelType> _view { get; set; }
         private ITextWriterDatabaseConnection _database;
 
         public TextWriterController(TextWriterViewBase<PanelType> view, ITextWriterDatabaseConnection database):base(view, database)
         {
+            ModuleName = "Text writer";
             _view = view;
             _database = database;
         }

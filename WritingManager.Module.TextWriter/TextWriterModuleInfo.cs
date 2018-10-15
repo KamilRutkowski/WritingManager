@@ -7,12 +7,13 @@ using Autofac;
 
 namespace WritingManager.Module.TextWriter
 {
-    public class TextWriterModuleInfo : ModuleInfoBase
+    public class TextWriterModuleInfo<PanelType> : ModuleInfoBase<PanelType>
     {
         public override void Registration(ContainerBuilder container)
         {
             container.RegisterType<TextWriterDatabaseConnection>()
                 .As<ITextWriterDatabaseConnection>()
+                .As<IDatabaseConnection>()
                 .SingleInstance();
 
             container.RegisterGeneric(typeof(TextWriterController<>))
@@ -28,7 +29,9 @@ namespace WritingManager.Module.TextWriter
                     default:
                         throw new Exception("Wrong configuration in TextWriter resolving");
                 }
-            }).As(typeof(TextWriterViewBase<>)).InstancePerDependency();
+            }).As<TextWriterViewBase<PanelType>>().As<ViewBase<PanelType>>().InstancePerDependency();
         }
+
+        public override Type MainControllerType { get; protected set; } = typeof(TextWriterController<PanelType>);
     }
 }
