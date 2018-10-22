@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
-namespace WritingManager.Module.TextWriter
+namespace WritingManager.Module.CharactersManager
 {
-    public class TextWriterController<PanelType> : IControllerBase<PanelType>
-    {        
-        private ITextWriterViewBase<PanelType> _view { get; set; }
+    public class CharactersManagerController<PanelType> : IControllerBase<PanelType>
+    {
+        private ICharactersManagerViewBase<PanelType> _view { get; set; }
 
         public string ModuleName { get; private set; }
 
-        private ITextWriterDatabaseConnection _database;
+        private ICharactersManagerDatabaseConnection _database;
 
-        public TextWriterController(ITextWriterViewBase<PanelType> view, ITextWriterDatabaseConnection database)
+        public CharactersManagerController(ICharactersManagerViewBase<PanelType> view, ICharactersManagerDatabaseConnection database)
         {
-            ModuleName = "Text writer";
+            ModuleName = "Characters manager";
             _view = view;
             _database = database;
         }

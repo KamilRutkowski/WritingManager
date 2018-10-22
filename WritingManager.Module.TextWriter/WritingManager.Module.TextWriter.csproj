@@ -51,7 +51,7 @@
     <Compile Include="ITextWriterDatabaseConnection.cs" />
     <Compile Include="TextWriterDatabaseConnection.cs" />
     <Compile Include="TextWriterModuleInfo.cs" />
-    <Compile Include="TextWriterViewBase.cs" />
+    <Compile Include="ITextWriterViewBase.cs" />
     <Compile Include="TextWriterViewWPF.cs" />
   </ItemGroup>
   <ItemGroup>

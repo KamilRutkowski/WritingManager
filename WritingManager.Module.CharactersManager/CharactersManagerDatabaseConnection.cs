@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WritingManager.Module.CharactersManager
 {
-    public class Class1
+    public class CharactersManagerDatabaseConnection: ICharactersManagerDatabaseConnection
     {
     }
 }

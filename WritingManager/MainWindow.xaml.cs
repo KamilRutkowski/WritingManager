@@ -29,40 +29,42 @@ namespace WritingManager
         {
             InitializeComponent();
             _controller = new ApplicationController<Panel>(this);
-            RefreshModuleBars();
+            RefreshLeftModuleBar();
+            RefreshRightModuleBar();
         }
 
         public List<(string, List<(string, Action)>)> MainToolbarOptions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<(ControllerBase<Panel>, bool)> LeftModules { get => _leftModules; set { _leftModules = value; RefreshModuleBars(); } }
-        private List<(ControllerBase<Panel>, bool)> _leftModules = new List<(ControllerBase<Panel>, bool)>();
-        public List<(ControllerBase<Panel>, bool)> RightModules { get => _rightModules; set { _rightModules = value; RefreshRightModuleBar(); } }
-        private List<(ControllerBase<Panel>, bool)> _rightModules = new List<(ControllerBase<Panel>, bool)>();
+        public List<(IControllerBase<Panel>, bool)> LeftModules { get => _leftModules; set { _leftModules = value; RefreshLeftModuleBar(); } }
+        private List<(IControllerBase<Panel>, bool)> _leftModules = new List<(IControllerBase<Panel>, bool)>();
+        public List<(IControllerBase<Panel>, bool)> RightModules { get => _rightModules; set { _rightModules = value; RefreshRightModuleBar(); } }
+        private List<(IControllerBase<Panel>, bool)> _rightModules = new List<(IControllerBase<Panel>, bool)>();
         public event NewModuleClick<Panel> LeftPanelModuleChanged;
         public event NewModuleClick<Panel> RightPanelModuleChanged;
         public Panel LeftPanel { get => _leftPanel;}
         public Panel RightPanel { get => _rightPanel;}
 
-        private void RefreshModuleBars()
-        {
-            populateToolbar(_leftModules, _leftPanelToolbar, LeftPanelModuleChanged);
-            populateToolbar(_rightModules, _rightPanelToolbar, RightPanelModuleChanged);
-        }
-
-        private void populateToolbar(List<(ControllerBase<Panel>, bool)> controllers, ToolBar toolBar, NewModuleClick<Panel> moduleChangedDelegate)
+        private void populateToolbar(List<(IControllerBase<Panel>, bool)> controllers, ToolBar toolBar, NewModuleClick<Panel> moduleChangedDelegate)
         {
             foreach (var module in controllers)
             {
                 Button b = new Button();
                 b.Content = module.Item1.ModuleName;
                 b.IsEnabled = !module.Item2;
-                b.Click += (object sender, RoutedEventArgs e) => { moduleChangedDelegate(module.Item1); };
+                b.Click += (object sender, RoutedEventArgs e) => { moduleChangedDelegate?.Invoke(module.Item1); };
                 toolBar.Items.Add(b);
             }
         }
 
+        private void RefreshLeftModuleBar()
+        {
+            _leftPanelToolbar?.Items.Clear();
+            populateToolbar(_leftModules, _leftPanelToolbar, LeftPanelModuleChanged);
+        }
+
         private void RefreshRightModuleBar()
         {
-
+            _rightPanelToolbar?.Items.Clear();
+            populateToolbar(_rightModules, _rightPanelToolbar, RightPanelModuleChanged);
         }
     }
 }

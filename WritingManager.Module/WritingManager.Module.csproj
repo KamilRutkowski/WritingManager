@@ -43,14 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="ControllerBase.cs" />
+    <Compile Include="IControllerBase.cs" />
     <Compile Include="IApplicationConfiguration.cs" />
-    <Compile Include="IDatabaseConnection.cs" />
-    <Compile Include="ModuleInfoBase.cs" />
+    <Compile Include="IModuleInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shortcut.cs" />
-    <Compile Include="ViewBase.cs" />
+    <Compile Include="IView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

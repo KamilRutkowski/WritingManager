@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WritingManager.Module.TextWriter
 {
-    public class TextWriterViewBase<PanelType>: ViewBase<PanelType>
+    public interface ITextWriterViewBase<PanelType>: IViewBase<PanelType>
     {
-        public virtual event Action Save;
-        public virtual string Data { get; protected set; }
+        event Action Save;
+        string Data { get; }
     }
 }

@@ -10,13 +10,13 @@ namespace WritingManager.Controller
     public interface IApplicationView<PanelType>
     {
         List<(string, List<(string, Action)>)> MainToolbarOptions { get; set; }
-        List<(ControllerBase<PanelType>, bool)> LeftModules { get; set; }
-        List<(ControllerBase<PanelType>, bool)> RightModules { get; set; }
+        List<(IControllerBase<PanelType>, bool)> LeftModules { get; set; }
+        List<(IControllerBase<PanelType>, bool)> RightModules { get; set; }
         event NewModuleClick<PanelType> LeftPanelModuleChanged;
         event NewModuleClick<PanelType> RightPanelModuleChanged;
         PanelType LeftPanel { get; }
         PanelType RightPanel { get; }
     }
 
-    public delegate void NewModuleClick<PanelType>(ControllerBase<PanelType> controllerBase);
+    public delegate void NewModuleClick<PanelType>(IControllerBase<PanelType> controllerBase);
 }

@@ -12,9 +12,9 @@ namespace WritingManager.Controller
     {
         private ApplicationConfiguration<PanelType> _configuration { get; set; } = new ApplicationConfiguration<PanelType>();
         private IContainer _container { get; set; }
-        private List<(ControllerBase<PanelType>, ModuleStatus)> _modules { get; set; } = new List<(ControllerBase<PanelType>, ModuleStatus)>();
-        private ControllerBase<PanelType> _activeLeftModule { get; set; } = null;
-        private ControllerBase<PanelType> _activeRightModule { get; set; } = null;
+        private List<(IControllerBase<PanelType>, ModuleStatus)> _modules { get; set; } = new List<(IControllerBase<PanelType>, ModuleStatus)>();
+        private IControllerBase<PanelType> _activeLeftModule { get; set; } = null;
+        private IControllerBase<PanelType> _activeRightModule { get; set; } = null;
 
         private IApplicationView<PanelType> _applicationView;
 
@@ -29,6 +29,33 @@ namespace WritingManager.Controller
             LoadConfiguration();
             RegisterModules();
             RecreateLastKnownLayout();
+            ConfigureEvents();
+        }
+
+        private void ConfigureEvents()
+        {
+            _applicationView.LeftPanelModuleChanged += (IControllerBase<PanelType> controller) => 
+            {
+                _activeLeftModule.UnloadFromPanel();
+                var oldModIndex = _modules.FindIndex(mt => mt.Item1 == _activeLeftModule);
+                _modules[oldModIndex] = (_activeLeftModule, ModuleStatus.LeftPanel);
+                var newModIndex = _modules.FindIndex(mt => mt.Item1 == controller);
+                _modules[newModIndex] = (controller, ModuleStatus.LeftPanel | ModuleStatus.Active);
+                _activeLeftModule = controller;
+                controller.ShowOnPanel(_applicationView.LeftPanel);
+                PopulateModuleToolbars();
+            };
+            _applicationView.RightPanelModuleChanged += (IControllerBase<PanelType> controller) =>
+            {
+                _activeRightModule.UnloadFromPanel();
+                var oldModIndex = _modules.FindIndex(mt => mt.Item1 == _activeRightModule);
+                _modules[oldModIndex] = (_activeRightModule, ModuleStatus.RightPanel);
+                var newModIndex = _modules.FindIndex(mt => mt.Item1 == controller);
+                _modules[newModIndex] = (controller, ModuleStatus.RightPanel | ModuleStatus.Active);
+                _activeRightModule = controller;
+                controller.ShowOnPanel(_applicationView.RightPanel);
+                PopulateModuleToolbars();
+            };
         }
 
         private void LoadConfiguration()
@@ -56,7 +83,7 @@ namespace WritingManager.Controller
         private void RecreateLastKnownLayout()
         {
             _modules = _container
-                .Resolve<IList<ControllerBase<PanelType>>>()
+                .Resolve<IList<IControllerBase<PanelType>>>()
                 .Select(controller =>
                     (controller,
                     _configuration.RegisteredModulesInfoBases.First(mod => controller.GetType() == mod.Item1.MainControllerType).Item2)).ToList();
@@ -69,7 +96,6 @@ namespace WritingManager.Controller
             if (_activeRightModule != null)
                 _activeRightModule.ShowOnPanel(_applicationView.RightPanel);
             PopulateModuleToolbars();
-
         }
 
         private void PopulateModuleToolbars()

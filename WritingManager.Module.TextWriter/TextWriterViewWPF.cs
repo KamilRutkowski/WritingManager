@@ -10,13 +10,12 @@ using WritingManager.Module;
 
 namespace WritingManager.Module.TextWriter
 {
-    public class TextWriterViewWPF : TextWriterViewBase<Panel>
+    public class TextWriterViewWPF : ITextWriterViewBase<Panel>
     {
-        public override string Data { get => base.Data; protected set => base.Data = value; }
+        public string Data { get; protected set; }
+        public Panel Panel { protected get; set; }
 
-        public override event Action Save;
-
-        private Command _saveCommand;
+        public event Action Save;
 
         private Grid _gridPanel;
         private ToolBar _toolBar;
@@ -28,12 +27,10 @@ namespace WritingManager.Module.TextWriter
             Initialize();
         }
 
-        public override void Initialize()
+        public void Initialize()
         {
-            _saveCommand = new Command(Save);
-
             _saveButton = new Button();
-            _saveButton.Command = _saveCommand;
+            _saveButton.Click += (object sender, RoutedEventArgs args) => { Save?.Invoke(); };
             _saveButton.Content = "Save document";
 
             _toolBar = new ToolBar();
@@ -69,12 +66,12 @@ namespace WritingManager.Module.TextWriter
 
         }
 
-        public override void Show()
+        public void Show()
         {
             Panel.Children.Add(_gridPanel);
         }
 
-        public override void Hide()
+        public void Hide()
         {
             Panel.Children.Clear();
         }

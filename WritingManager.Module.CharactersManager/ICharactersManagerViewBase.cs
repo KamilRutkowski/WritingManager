@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WritingManager.Module.TextWriter
+namespace WritingManager.Module.CharactersManager
 {
-    public interface ITextWriterDatabaseConnection
+    public interface ICharactersManagerViewBase<PanelType> : IViewBase<PanelType>
     {
     }
 }
