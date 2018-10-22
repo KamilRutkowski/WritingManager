@@ -68,6 +68,20 @@ namespace WritingManager.Controller
                 _activeLeftModule.ShowOnPanel(_applicationView.LeftPanel);
             if (_activeRightModule != null)
                 _activeRightModule.ShowOnPanel(_applicationView.RightPanel);
+            PopulateModuleToolbars();
+
+        }
+
+        private void PopulateModuleToolbars()
+        {
+            _applicationView.LeftModules = _modules.
+                Where(m => (m.Item2 & ModuleStatus.LeftPanel) != 0)
+                .Select(module => (module.Item1, (module.Item2 & ModuleStatus.Active) != 0 ? true : false))
+                .ToList();
+            _applicationView.RightModules = _modules.
+                Where(m => (m.Item2 & ModuleStatus.RightPanel) != 0)
+                .Select(module => (module.Item1, (module.Item2 & ModuleStatus.Active) != 0 ? true : false))
+                .ToList();
         }
     }
 }
