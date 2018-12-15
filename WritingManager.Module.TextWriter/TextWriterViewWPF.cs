@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseConnectorServiceWCF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -148,9 +149,12 @@ namespace WritingManager.Module.TextWriter
             return dialog.DocumentName;
         }
 
-        public string LoadFile(IEnumerable<TextFileInfo> textFileInfos)
+        public FileData LoadFile(IEnumerable<FileData> textFileInfos)
         {
-            throw new NotImplementedException();
+            var dialog = new ChooseFileAndDateDialog();
+            dialog.DataStore = textFileInfos.ToList();
+            dialog.ShowDialog();
+            return dialog.ChoosenFileData;
         }
     }
 }

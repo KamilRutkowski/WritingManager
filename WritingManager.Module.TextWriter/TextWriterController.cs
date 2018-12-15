@@ -31,6 +31,7 @@ namespace WritingManager.Module.TextWriter
             _view.Panel = panel;
             _view.Show();
             _view.Save += Save;
+            _view.Load += Load;
         }
 
         public void UnloadFromPanel()
@@ -61,7 +62,7 @@ namespace WritingManager.Module.TextWriter
 
         private void SaveNew()
         {
-            string documentName = _view.SaveFileName();
+            var documentName = _view.SaveFileName();
             if (documentName.Count() > 0)
             {
                 _view.FileName = documentName;
@@ -71,7 +72,12 @@ namespace WritingManager.Module.TextWriter
 
         private void Load()
         {
-
+            var choosenFile = _view.LoadFile(_dataConnection.GetDocumentNamesAndDates());
+            if((choosenFile.FileName != "") && (choosenFile.Date != null))
+            {
+                _view.Data = _dataConnection.GetDocument(choosenFile);
+                _view.FileName = choosenFile.FileName;
+            }
         }
     }
 }

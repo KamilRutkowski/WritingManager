@@ -56,7 +56,6 @@
     </Compile>
     <Compile Include="ITextWriterDataConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextFileInfo.cs" />
     <Compile Include="TextWriterController.cs" />
     <Compile Include="TextWriterDataWCF.cs" />
     <Compile Include="TextWriterModuleInfo.cs" />

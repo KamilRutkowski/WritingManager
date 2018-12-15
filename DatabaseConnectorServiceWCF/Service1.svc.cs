@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading;
 
 namespace DatabaseConnectorServiceWCF
 {
@@ -17,7 +18,15 @@ namespace DatabaseConnectorServiceWCF
 
         public string GetDocument(FileData fileData)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var request = "SELECT sd.Text From FileNames fn, SavedDocuments sd where fn.Id = sd.FileNameId And fn.FileName like @FN And sd.SaveDate = @SD";
+                var command = new SqlCommand(request, connection);
+                command.Parameters.AddWithValue("@FN", fileData.FileName);
+                command.Parameters.AddWithValue("@SD", fileData.Date);
+                connection.Open();
+                return (string)command.ExecuteScalar();
+            }
         }
 
         public List<DateTime> GetDocumentDates(string documentName)
@@ -69,11 +78,11 @@ namespace DatabaseConnectorServiceWCF
 
         public bool SaveDocument(FileData fileData)
         {
+            int indexFound = -1;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var request = "SELECT Id FROM [dbo].[FileNames] WHERE FileName like @filename;";
                 var command = new SqlCommand(request, connection);
-                int indexFound = -1;
                 command.Parameters.AddWithValue("@filename", fileData.FileName);
                 connection.Open();
                 try

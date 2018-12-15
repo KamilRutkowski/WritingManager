@@ -44,8 +44,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChooseFileAndDateDialog.cs" />
     <Compile Include="ChooseFileDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseConnectorServiceWCF\DatabaseConnectorServiceWCF.csproj">
+      <Project>{4B479A4E-7A03-419D-A86E-3C0925D1351E}</Project>
+      <Name>DatabaseConnectorServiceWCF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

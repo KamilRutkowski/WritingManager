@@ -18,12 +18,12 @@ namespace WritingManager.Module.TextWriter
 
         public string GetDocument(FileData fileData)
         {
-            throw new NotImplementedException();
+            return service1.GetDocument(fileData);
         }
 
         public List<FileData> GetDocumentNamesAndDates()
         {
-            throw new NotImplementedException();
+            return service1.GetDocumentNamesAndDates();
         }
 
         public bool SaveDocument(FileData fileData)

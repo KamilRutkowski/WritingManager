@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseConnectorServiceWCF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,6 @@ namespace WritingManager.Module.TextWriter
         string FileName { get; set; }
 
         string SaveFileName();
-        string LoadFile(IEnumerable<TextFileInfo> textFileInfos);
+        FileData LoadFile(IEnumerable<FileData> textFileInfos);
     }
 }
