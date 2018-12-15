@@ -12,13 +12,10 @@ namespace WritingManager.Module.CharactersManager
 
         public string ModuleName { get; private set; }
 
-        private ICharactersManagerDatabaseConnection _database;
-
-        public CharactersManagerController(ICharactersManagerViewBase<PanelType> view, ICharactersManagerDatabaseConnection database)
+        public CharactersManagerController(ICharactersManagerViewBase<PanelType> view)
         {
             ModuleName = "Characters manager";
             _view = view;
-            _database = database;
         }
 
         public void RegisterShortcuts(IList<Shortcut<PanelType>> shortcuts)

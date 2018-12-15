@@ -14,9 +14,10 @@ namespace WritingManager.Controller
         public ApplicationType BuildTarget { get; set; } = ApplicationType.WPF;
         public List<(IModuleInfoBase<PanelType>, ModuleStatus)> RegisteredModulesInfoBases { get; set; } = new List<(IModuleInfoBase<PanelType>, ModuleStatus)>
         {
-            (new TextWriterModuleInfo<PanelType>(), ModuleStatus.RightPanel | ModuleStatus.Active),
-            (new CharactersManagerModuleInfo<PanelType>(), ModuleStatus.RightPanel)
+            (new TextWriterModuleInfo<PanelType>(), ModuleStatus.LeftPanel | ModuleStatus.Active),
+            (new CharactersManagerModuleInfo<PanelType>(), ModuleStatus.RightPanel | ModuleStatus.Active)
         };
+        public string ConnectionString { get; set; }
     }
 
     [Flags]

@@ -11,10 +11,6 @@ namespace WritingManager.Module.CharactersManager
     {
         public void Registration(ContainerBuilder container)
         {
-            container.RegisterType<CharactersManagerDatabaseConnection>()
-                .As<ICharactersManagerDatabaseConnection>()
-                .SingleInstance();
-
             container.RegisterGeneric(typeof(CharactersManagerController<>))
                 .As(typeof(IControllerBase<>))
                 .SingleInstance();

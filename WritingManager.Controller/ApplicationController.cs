@@ -36,25 +36,33 @@ namespace WritingManager.Controller
         {
             _applicationView.LeftPanelModuleChanged += (IControllerBase<PanelType> controller) => 
             {
-                _activeLeftModule.UnloadFromPanel();
-                var oldModIndex = _modules.FindIndex(mt => mt.Item1 == _activeLeftModule);
-                _modules[oldModIndex] = (_activeLeftModule, ModuleStatus.LeftPanel);
+                if (_activeLeftModule != null)
+                {
+                    _activeLeftModule.UnloadFromPanel();
+                    var oldModIndex = _modules.FindIndex(mt => mt.Item1 == _activeLeftModule);
+                    _modules[oldModIndex] = (_activeLeftModule, ModuleStatus.LeftPanel);
+                }
                 var newModIndex = _modules.FindIndex(mt => mt.Item1 == controller);
                 _modules[newModIndex] = (controller, ModuleStatus.LeftPanel | ModuleStatus.Active);
                 _activeLeftModule = controller;
                 controller.ShowOnPanel(_applicationView.LeftPanel);
                 PopulateModuleToolbars();
+                SaveConfiguration();
             };
             _applicationView.RightPanelModuleChanged += (IControllerBase<PanelType> controller) =>
             {
-                _activeRightModule.UnloadFromPanel();
-                var oldModIndex = _modules.FindIndex(mt => mt.Item1 == _activeRightModule);
-                _modules[oldModIndex] = (_activeRightModule, ModuleStatus.RightPanel);
+                if (_activeRightModule != null)
+                {
+                    _activeRightModule.UnloadFromPanel();
+                    var oldModIndex = _modules.FindIndex(mt => mt.Item1 == _activeRightModule);
+                    _modules[oldModIndex] = (_activeRightModule, ModuleStatus.RightPanel);
+                }
                 var newModIndex = _modules.FindIndex(mt => mt.Item1 == controller);
                 _modules[newModIndex] = (controller, ModuleStatus.RightPanel | ModuleStatus.Active);
                 _activeRightModule = controller;
                 controller.ShowOnPanel(_applicationView.RightPanel);
                 PopulateModuleToolbars();
+                SaveConfiguration();
             };
         }
 

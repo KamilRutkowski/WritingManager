@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace WritingManager.Module.TextWriter
 {
-    public interface ITextWriterDatabaseConnection
+    public class TextFileInfo
     {
+        public int IDFile { get; set; }
+        public string FileName { get; set; }
+        public DateTime SaveTime { get; set; }
     }
 }

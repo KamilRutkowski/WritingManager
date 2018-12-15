@@ -9,6 +9,12 @@ namespace WritingManager.Module.TextWriter
     public interface ITextWriterViewBase<PanelType>: IViewBase<PanelType>
     {
         event Action Save;
-        string Data { get; }
+        event Action SaveNew;
+        event Action Load;
+        string Data { get; set; }
+        string FileName { get; set; }
+
+        string SaveFileName();
+        string LoadFile(IEnumerable<TextFileInfo> textFileInfos);
     }
 }

@@ -11,12 +11,12 @@ namespace WritingManager.Module.TextWriter
     {
         public void Registration(ContainerBuilder container)
         {
-            container.RegisterType<TextWriterDatabaseConnection>()
-                .As<ITextWriterDatabaseConnection>()
-                .SingleInstance();
-
             container.RegisterGeneric(typeof(TextWriterController<>))
                 .As(typeof(IControllerBase<>))
+                .SingleInstance();
+
+            container.RegisterType<TextWriterDataWCF>()
+                .As<ITextWriterDataConnection>()
                 .SingleInstance();
 
             container.Register(t =>
