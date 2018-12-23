@@ -29,32 +29,6 @@ namespace DatabaseConnectorServiceWCF
             }
         }
 
-        public List<DateTime> GetDocumentDates(string documentName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<string> GetDocumentNames()
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                var request = "SELECT FileName FROM [dbo].[FileNames];";
-                var command = new SqlCommand(request, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                var result = new List<string>();
-                if(reader.HasRows)
-                {
-                    while(reader.Read())
-                    {
-                        result.Add(reader.GetString(0));
-                    }
-                }
-                reader.Close();
-                return result;
-            }
-        }
-
         public List<FileData> GetDocumentNamesAndDates()
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

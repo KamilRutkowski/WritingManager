@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseConnectorServiceWCF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,15 @@ namespace WritingManager.Module.CharactersManager
 {
     public interface ICharactersManagerViewBase<PanelType> : IViewBase<PanelType>
     {
+        string Name { get; set; }
+        string BaseInformation { get; set; }
+        string Appearance { get; set; }
+        string Description { get; set; }
+        event Action Save;
+        event Action Load;
+        event Action NewCharacter;
+        bool ClearFormPrompt();
+        string SaveFileName();
+        FileData LoadFile(IEnumerable<FileData> textFileInfos);
     }
 }

@@ -13,14 +13,8 @@ namespace DatabaseConnectorServiceWCF
     public interface IService1
     {
         [OperationContract]
-        List<string> GetDocumentNames();
-
-        [OperationContract]
         List<FileData> GetDocumentNamesAndDates();
-
-        [OperationContract]
-        List<DateTime> GetDocumentDates(string documentName);
-
+        
         [OperationContract]
         string GetDocument(FileData fileData);
 
