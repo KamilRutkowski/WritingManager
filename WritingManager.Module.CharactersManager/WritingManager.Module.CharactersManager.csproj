@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharactersManagerController.cs" />
+    <Compile Include="CharactersManagerDataWCF.cs" />
     <Compile Include="CharactersManagerModuleInfo.cs" />
     <Compile Include="CharactersManagerViewWPF.cs" />
     <Compile Include="Connected Services\ServiceReference1\Reference.cs">
@@ -56,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ICharactersManagerDataConnection.cs" />
     <Compile Include="ICharactersManagerViewBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,9 +79,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseConnectorServiceWCF\DatabaseConnectorServiceWCF.csproj">
+      <Project>{4B479A4E-7A03-419D-A86E-3C0925D1351E}</Project>
+      <Name>DatabaseConnectorServiceWCF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WritingManager.Module\WritingManager.Module.csproj">
       <Project>{5585c172-ee3e-46ea-9c7a-04e289c7807b}</Project>
       <Name>WritingManager.Module</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WritingManager.WPF.Common.Dialogs\WritingManager.WPF.Common.Dialogs.csproj">
+      <Project>{B6D6EA59-4139-47C0-A856-96661D0F5803}</Project>
+      <Name>WritingManager.WPF.Common.Dialogs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -30,8 +30,6 @@ namespace WritingManager.Module.TextWriter
         {
             _view.Panel = panel;
             _view.Show();
-            _view.Save += Save;
-            _view.Load += Load;
         }
 
         public void UnloadFromPanel()

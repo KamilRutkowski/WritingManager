@@ -16,6 +16,61 @@ namespace DatabaseConnectorServiceWCF
     {
         private string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\Studia\\WritingManager\\DatabaseConnectorServiceWCF\\App_Data\\Database.mdf;Integrated Security=True";
 
+        public CharacterData GetCharacter(CharacterData nameAndDate)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var request = "SELECT CharacterName, Date, BaseInformation, Appearance, Description FROM [dbo].[Characters] where CharacterName = @name AND Date = @date;";
+                var command = new SqlCommand(request, connection);
+                command.Parameters.AddWithValue("@name", nameAndDate.CharacterName);
+                command.Parameters.AddWithValue("@date", nameAndDate.Date);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                var result = new CharacterData();
+                if (reader.HasRows)
+                {
+                    if(reader.Read())
+                    {
+                        result = new CharacterData()
+                        {
+                            CharacterName = reader.GetString(0),
+                            Date = reader.GetDateTime(1),
+                            BaseInformations = reader.GetString(2),
+                            Appearance = reader.GetString(3),
+                            Description = reader.GetString(4)
+                        };
+                    }
+                }
+                reader.Close();
+                return result;
+            }
+        }
+
+        public List<CharacterData> GetCharactersAndDates()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var request = "SELECT CharacterName, Date FROM [dbo].[Characters];";
+                var command = new SqlCommand(request, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                var result = new List<CharacterData>();
+                if (reader.HasRows)
+                {
+                    if (reader.Read())
+                    {
+                        result.Add(new CharacterData()
+                        {
+                            CharacterName = reader.GetString(0),
+                            Date = reader.GetDateTime(1)
+                        });
+                    }
+                }
+                reader.Close();
+                return result;
+            }
+        }
+
         public string GetDocument(FileData fileData)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -47,6 +102,22 @@ namespace DatabaseConnectorServiceWCF
                 }
                 reader.Close();
                 return result;
+            }
+        }
+
+        public bool SaveCharacter(CharacterData character)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var insertDocumentQuerry = "Insert Into [dbo].[Characters] (CharacterName, Date, BaseInformation, Appearance, Description) values (@name, @date, @baseInfo, @appearance, @desc)";
+                var insertDocumentCommand = new SqlCommand(insertDocumentQuerry, connection);
+                insertDocumentCommand.Parameters.AddWithValue("@name", character.CharacterName);
+                insertDocumentCommand.Parameters.AddWithValue("@date", character.Date);
+                insertDocumentCommand.Parameters.AddWithValue("@baseInfo", character.BaseInformations);
+                insertDocumentCommand.Parameters.AddWithValue("@appearance", character.Appearance);
+                insertDocumentCommand.Parameters.AddWithValue("@desc", character.Description);
+                connection.Open();
+                return insertDocumentCommand.ExecuteNonQuery() > 0;
             }
         }
 

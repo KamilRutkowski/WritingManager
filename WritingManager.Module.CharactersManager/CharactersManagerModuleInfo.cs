@@ -25,6 +25,10 @@ namespace WritingManager.Module.CharactersManager
                         throw new Exception("Wrong configuration in TextWriter resolving");
                 }
             }).As<ICharactersManagerViewBase<PanelType>>().As<IViewBase<PanelType>>().InstancePerDependency();
+
+            container.RegisterType<CharactersManagerDataWCF>()
+                .As<ICharactersManagerDataConnection>()
+                .SingleInstance();
         }
 
         public Type MainControllerType { get; protected set; } = typeof(CharactersManagerController<PanelType>);

@@ -9,26 +9,26 @@ namespace WritingManager.Module.TextWriter
 {
     public class TextWriterDataWCF : ITextWriterDataConnection
     {
-        private IService1 service1;
+        private IService1 _service1;
 
         public TextWriterDataWCF()
         {
-            service1 = new Service1();
+            _service1 = new Service1();
         }
 
         public string GetDocument(FileData fileData)
         {
-            return service1.GetDocument(fileData);
+            return _service1.GetDocument(fileData);
         }
 
         public List<FileData> GetDocumentNamesAndDates()
         {
-            return service1.GetDocumentNamesAndDates();
+            return _service1.GetDocumentNamesAndDates();
         }
 
         public bool SaveDocument(FileData fileData)
         {
-            return service1.SaveDocument(fileData);
+            return _service1.SaveDocument(fileData);
         }
     }
 }

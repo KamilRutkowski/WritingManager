@@ -21,7 +21,14 @@ namespace DatabaseConnectorServiceWCF
         [OperationContract]
         bool SaveDocument(FileData fileData);
 
-        // TODO: Add your service operations here
+        [OperationContract]
+        List<CharacterData> GetCharactersAndDates();
+
+        [OperationContract]
+        CharacterData GetCharacter(CharacterData nameAndDate);
+
+        [OperationContract]
+        bool SaveCharacter(CharacterData character);
     }
 
 
@@ -29,29 +36,32 @@ namespace DatabaseConnectorServiceWCF
     [DataContract]
     public class FileData
     {
-        string _fileName = "";
-        DateTime _date = DateTime.MinValue;
-        string _text = "";
+        [DataMember]
+        public string FileName { get; set; }
 
         [DataMember]
-        public string FileName
-        {
-            get { return _fileName; }
-            set { _fileName = value; }
-        }
+        public DateTime Date { get; set; }
 
         [DataMember]
-        public DateTime Date
-        {
-            get { return _date; }
-            set { _date = value; }
-        }
+        public string Text { get; set; }
+    }
+
+    [DataContract]
+    public class CharacterData
+    {
+        [DataMember]
+        public DateTime Date { get; set; }
 
         [DataMember]
-        public string Text
-        {
-            get { return _text; }
-            set { _text = value; }
-        }
+        public string CharacterName { get; set; }
+
+        [DataMember]
+        public string BaseInformations { get; set; }
+
+        [DataMember]
+        public string Appearance { get; set; }
+
+        [DataMember]
+        public string Description { get; set; }
     }
 }
