@@ -57,7 +57,7 @@ namespace DatabaseConnectorServiceWCF
                 var result = new List<CharacterData>();
                 if (reader.HasRows)
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         result.Add(new CharacterData()
                         {
@@ -98,6 +98,55 @@ namespace DatabaseConnectorServiceWCF
                     while (reader.Read())
                     {
                         result.Add(new FileData() { FileName = reader.GetString(0), Date = reader.GetDateTime(1) });
+                    }
+                }
+                reader.Close();
+                return result;
+            }
+        }
+
+        public ImageData GetImage(ImageData imageData)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var request = "SELECT Name, Date, Image FROM [dbo].[Maps] where Name = @name and Date = @date;";
+                var command = new SqlCommand(request, connection);
+                command.Parameters.AddWithValue("@name", imageData.ImageName);
+                command.Parameters.AddWithValue("@date", imageData.Date);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                var result = new ImageData();
+                if (reader.HasRows)
+                {
+                    if (reader.Read())
+                    {
+                        result.ImageName = reader.GetString(0);
+                        result.Date = reader.GetDateTime(1);
+                        result.ImageArray = reader.GetSqlBytes(2).Buffer;
+                    }
+                }
+                reader.Close();
+                return result;
+            }
+        }
+
+        public List<ImageData> GetImagesAndDates()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var request = "SELECT Name, Date FROM [dbo].[Maps];";
+                var command = new SqlCommand(request, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                var result = new List<ImageData>();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        result.Add(new ImageData() {
+                            ImageName = reader.GetString(0),
+                            Date = reader.GetDateTime(1)
+                        });
                     }
                 }
                 reader.Close();
@@ -149,6 +198,20 @@ namespace DatabaseConnectorServiceWCF
                 insertDocumentCommand.Parameters.AddWithValue("@FNId", indexFound);
                 insertDocumentCommand.Parameters.AddWithValue("@date", fileData.Date);
                 insertDocumentCommand.Parameters.AddWithValue("@text", fileData.Text);
+                return insertDocumentCommand.ExecuteNonQuery() > 0;
+            }
+        }
+
+        public bool SaveImage(ImageData imageData)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var insertDocumentQuerry = "Insert Into [dbo].[Maps] (Name, Date, Image) values (@name, @date, @image)";
+                var insertDocumentCommand = new SqlCommand(insertDocumentQuerry, connection);
+                insertDocumentCommand.Parameters.AddWithValue("@name", imageData.ImageName);
+                insertDocumentCommand.Parameters.AddWithValue("@date", imageData.Date);
+                insertDocumentCommand.Parameters.AddWithValue("@image", imageData.ImageArray);
+                connection.Open();
                 return insertDocumentCommand.ExecuteNonQuery() > 0;
             }
         }

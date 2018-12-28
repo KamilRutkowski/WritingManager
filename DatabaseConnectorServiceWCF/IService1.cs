@@ -29,6 +29,15 @@ namespace DatabaseConnectorServiceWCF
 
         [OperationContract]
         bool SaveCharacter(CharacterData character);
+
+        [OperationContract]
+        ImageData GetImage(ImageData imageData);
+
+        [OperationContract]
+        bool SaveImage(ImageData imageData);
+
+        [OperationContract]
+        List<ImageData> GetImagesAndDates();
     }
 
 
@@ -63,5 +72,18 @@ namespace DatabaseConnectorServiceWCF
 
         [DataMember]
         public string Description { get; set; }
+    }
+
+    [DataContract]
+    public class ImageData
+    {
+        [DataMember]
+        public DateTime Date { get; set; }
+
+        [DataMember]
+        public string ImageName { get; set; }
+
+        [DataMember]
+        public byte[] ImageArray { get; set; }
     }
 }

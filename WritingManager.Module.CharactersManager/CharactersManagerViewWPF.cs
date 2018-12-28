@@ -72,7 +72,6 @@ namespace WritingManager.Module.CharactersManager
         private MenuItem _saveFile;
         private MenuItem _loadFile;
         private MenuItem _fileMenuItem;
-        private TextBox _fileNameTextBox;
         private Menu _fileMenu;
 
         private TextBox _name;
@@ -105,13 +104,6 @@ namespace WritingManager.Module.CharactersManager
             _newCharacter.Click += (sender, args) => { NewCharacter?.Invoke(); };
             _newCharacter.Header = "New character";
 
-            _fileNameTextBox = new TextBox();
-            _fileNameTextBox.Width = 100;
-            _fileNameTextBox.IsReadOnly = true;
-
-            var fileNameLabel = new Label();
-            fileNameLabel.Content = "Current document name:";
-
             _fileMenuItem.Items.Add(_newCharacter);
             _fileMenuItem.Items.Add(_saveFile);
             _fileMenuItem.Items.Add(_loadFile);
@@ -119,8 +111,6 @@ namespace WritingManager.Module.CharactersManager
 
             _toolBar = new ToolBar();
             _toolBar.Items.Add(_fileMenu);
-            _toolBar.Items.Add(fileNameLabel);
-            _toolBar.Items.Add(_fileNameTextBox);
             Grid.SetColumn(_toolBar, 0);
             Grid.SetRow(_toolBar, 0);
             #endregion

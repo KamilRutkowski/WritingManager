@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WritingManager.Module;
 using WritingManager.Module.CharactersManager;
+using WritingManager.Module.MapManager;
 using WritingManager.Module.TextWriter;
 
 namespace WritingManager.Controller
@@ -15,7 +16,8 @@ namespace WritingManager.Controller
         public List<(IModuleInfoBase<PanelType>, ModuleStatus)> RegisteredModulesInfoBases { get; set; } = new List<(IModuleInfoBase<PanelType>, ModuleStatus)>
         {
             (new TextWriterModuleInfo<PanelType>(), ModuleStatus.LeftPanel | ModuleStatus.Active),
-            (new CharactersManagerModuleInfo<PanelType>(), ModuleStatus.RightPanel | ModuleStatus.Active)
+            (new CharactersManagerModuleInfo<PanelType>(), ModuleStatus.RightPanel | ModuleStatus.Active),
+            (new MapManagerModuleInfo<PanelType>(), ModuleStatus.RightPanel)
         };
         public string ConnectionString { get; set; }
     }

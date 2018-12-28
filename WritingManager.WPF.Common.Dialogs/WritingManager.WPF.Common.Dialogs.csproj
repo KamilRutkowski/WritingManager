@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ChooseFileAndDateDialog.cs" />
     <Compile Include="ChooseFileDialog.cs" />
+    <Compile Include="ChooseStringDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingManager.WPF.Common.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseConnectorServiceWCF", "DatabaseConnectorServiceWCF\DatabaseConnectorServiceWCF.csproj", "{4B479A4E-7A03-419D-A86E-3C0925D1351E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingManager.Module.MapManager", "WritingManager.Module.MapManager\WritingManager.Module.MapManager.csproj", "{70F26016-8448-4CDE-9C9E-20C0F64426CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{4B479A4E-7A03-419D-A86E-3C0925D1351E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B479A4E-7A03-419D-A86E-3C0925D1351E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B479A4E-7A03-419D-A86E-3C0925D1351E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E8689C23-C4F9-4850-BB5D-904BF1F32049} = {E097B940-8209-477B-BAE1-85C0BB20FD8C}
 		{31BC229D-FA97-43F1-BA27-2034D6E2E95C} = {E097B940-8209-477B-BAE1-85C0BB20FD8C}
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA} = {E097B940-8209-477B-BAE1-85C0BB20FD8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {772BB917-FEF0-4BAA-9A6A-68FDC259980A}
