@@ -22,6 +22,31 @@ namespace WritingManager.Controller
         {
             _applicationView = view;
             Initialize();
+            _applicationView.MoveModuleToPanel += (module, target) =>
+            {
+                if (target == ModuleStatus.LeftPanel)
+                {
+                    foreach (var mod in _modules)
+                        if ((mod.Item2 & ModuleStatus.Active) == ModuleStatus.Active)
+                            mod.Item1.UnloadFromPanel();
+                    _modules.Remove(_modules.First(mod => mod.Item1 == module));
+                    _modules.Add((module, ModuleStatus.LeftPanel));
+                    _activeRightModule = null;
+                    SetPanels();
+                    PopulateModuleToolbars();
+                }
+                else if (target == ModuleStatus.RightPanel)
+                {
+                    foreach (var mod in _modules)
+                        if ((mod.Item2 & ModuleStatus.Active) == ModuleStatus.Active)
+                            mod.Item1.UnloadFromPanel();
+                    _modules.Remove(_modules.First(mod => mod.Item1 == module));
+                    _modules.Add((module, ModuleStatus.RightPanel));
+                    _activeLeftModule = null;
+                    SetPanels();
+                    PopulateModuleToolbars();
+                }
+            };
         }
 
         private void Initialize()
@@ -95,6 +120,12 @@ namespace WritingManager.Controller
                 .Select(controller =>
                     (controller,
                     _configuration.RegisteredModulesInfoBases.First(mod => controller.GetType() == mod.Item1.MainControllerType).Item2)).ToList();
+            SetPanels();
+            PopulateModuleToolbars();
+        }
+
+        private void SetPanels()
+        {
             if (_modules.Any(modules => modules.Item2 == (ModuleStatus.LeftPanel | ModuleStatus.Active)))
                 _activeLeftModule = _modules.FirstOrDefault(modules => modules.Item2 == (ModuleStatus.LeftPanel | ModuleStatus.Active)).Item1;
             if (_modules.Any(modules => modules.Item2 == (ModuleStatus.RightPanel | ModuleStatus.Active)))
@@ -103,7 +134,6 @@ namespace WritingManager.Controller
                 _activeLeftModule.ShowOnPanel(_applicationView.LeftPanel);
             if (_activeRightModule != null)
                 _activeRightModule.ShowOnPanel(_applicationView.RightPanel);
-            PopulateModuleToolbars();
         }
 
         private void PopulateModuleToolbars()

@@ -96,8 +96,6 @@ namespace WritingManager.Module.MapManager
 
             _imageBox = new Image();
             _imageBox.Stretch = System.Windows.Media.Stretch.Fill;
-            //_imageBox.Width = 200;
-            //_imageBox.Height = 200;
             Grid.SetColumn(_imageBox, 0);
             Grid.SetRow(_imageBox, 1);
 

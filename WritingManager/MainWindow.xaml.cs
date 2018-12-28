@@ -31,6 +31,16 @@ namespace WritingManager
             _controller = new ApplicationController<Panel>(this);
             RefreshLeftModuleBar();
             RefreshRightModuleBar();
+            _moveToLeft.Click += (sender, e) =>
+            {
+                if (_rightModules.Any(module => module.Item2))
+                    MoveModuleToPanel?.Invoke(_rightModules.First(module => module.Item2).Item1, ModuleStatus.LeftPanel);
+            };
+            _moveToRight.Click += (sender, e) =>
+            {
+                if (_leftModules.Any(module => module.Item2))
+                    MoveModuleToPanel?.Invoke(_leftModules.First(module => module.Item2).Item1, ModuleStatus.RightPanel);
+            };
         }
 
         public List<(string, List<(string, Action)>)> MainToolbarOptions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -40,6 +50,8 @@ namespace WritingManager
         private List<(IControllerBase<Panel>, bool)> _rightModules = new List<(IControllerBase<Panel>, bool)>();
         public event NewModuleClick<Panel> LeftPanelModuleChanged;
         public event NewModuleClick<Panel> RightPanelModuleChanged;
+        public event MoveModule<Panel> MoveModuleToPanel;
+
         public Panel LeftPanel { get => _leftPanel;}
         public Panel RightPanel { get => _rightPanel;}
 
