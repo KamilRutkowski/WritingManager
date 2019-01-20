@@ -16,6 +16,6 @@ namespace WritingManager.Module.TextWriter
         string FileName { get; set; }
 
         string SaveFileName();
-        FileData LoadFile(IEnumerable<FileData> textFileInfos);
+        (bool, FileData) LoadFile(IEnumerable<FileData> textFileInfos);
     }
 }

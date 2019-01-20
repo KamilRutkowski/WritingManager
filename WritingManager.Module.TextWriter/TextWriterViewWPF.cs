@@ -149,12 +149,12 @@ namespace WritingManager.Module.TextWriter
             return dialog.DocumentName;
         }
 
-        public FileData LoadFile(IEnumerable<FileData> textFileInfos)
+        public (bool, FileData) LoadFile(IEnumerable<FileData> textFileInfos)
         {
             var dialog = new ChooseFileAndDateDialog();
             dialog.DataStore = textFileInfos.ToList();
             dialog.ShowDialog();
-            return dialog.ChoosenFileData;
+            return (dialog.WasOk, dialog.ChoosenFileData);
         }
     }
 }

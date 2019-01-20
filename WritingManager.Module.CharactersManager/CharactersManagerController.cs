@@ -70,10 +70,12 @@ namespace WritingManager.Module.CharactersManager
 
         private void Load()
         {
-            var characterData = _view.LoadFile(
+            (var result, var characterData) = _view.LoadFile(
                 _dataConnection
                 .GetCharactersAndDates()
                 .Select(cd => new FileData() { FileName = cd.CharacterName, Date = cd.Date }));
+            if (!result)
+                return;
             var data = _dataConnection
                 .GetCharacter(new CharacterData() { CharacterName = characterData.FileName, Date = characterData.Date });
             _view.Name = data.CharacterName;

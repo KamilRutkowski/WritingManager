@@ -18,6 +18,6 @@ namespace WritingManager.Module.CharactersManager
         event Action NewCharacter;
         bool ClearFormPrompt();
         string SaveFileName();
-        FileData LoadFile(IEnumerable<FileData> textFileInfos);
+        (bool, FileData) LoadFile(IEnumerable<FileData> textFileInfos);
     }
 }

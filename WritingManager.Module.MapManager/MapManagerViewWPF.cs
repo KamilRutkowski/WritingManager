@@ -123,12 +123,12 @@ namespace WritingManager.Module.MapManager
             Panel.Children.Add(_gridPanel);
         }
 
-        public FileData LoadImage(List<FileData> imagesInDB)
+        public (bool, FileData) LoadImage(List<FileData> imagesInDB)
         {
             var dialog = new ChooseFileAndDateDialog();
             dialog.DataStore = imagesInDB;
             dialog.ShowDialog();
-            return dialog.ChoosenFileData;
+            return (dialog.WasOk, dialog.ChoosenFileData);
         }
 
         public string AddImage()

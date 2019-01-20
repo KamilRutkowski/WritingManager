@@ -59,12 +59,14 @@ namespace WritingManager.Module.MapManager
 
         private void LoadImage()
         {
-            var imageData = _view.LoadImage(_dataConnection.GetImagesAndDates()
+            (var result, var imageData) = _view.LoadImage(_dataConnection.GetImagesAndDates()
                 .Select(imdata => new FileData()
                 {
                     Date = imdata.Date,
                     FileName = imdata.ImageName
                 }).ToList());
+            if (!result)
+                return;
             var img = _dataConnection.GetImage(new ImageData()
             {
                 Date = imageData.Date,

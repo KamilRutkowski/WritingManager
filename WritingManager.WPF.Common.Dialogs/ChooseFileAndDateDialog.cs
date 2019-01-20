@@ -24,7 +24,9 @@ namespace WritingManager.WPF.Common.Dialogs
                 value.Select(fd => fd.FileName).Distinct().ToList().ForEach(fileName => _fileCB.Items.Add(fileName));
                 _dataStore = value;
             }
-        } 
+        }
+
+        public bool WasOk { get; private set; } = false;
 
         private List<FileData> _dataStore { get; set; }
 
@@ -80,7 +82,17 @@ namespace WritingManager.WPF.Common.Dialogs
             _acceptButton = new Button();
             _acceptButton.Content = "OK";
             _acceptButton.Margin = new Thickness(10, 10, 10, 10);
-            _acceptButton.Click += (sender, e) => { ChoosenFileData = new FileData() { FileName = _fileCB.Text, Date = (DateTime)_dateCB.SelectedValue  }; Close(); };
+            _acceptButton.Click += (sender, e) => 
+            {
+                ChoosenFileData = new FileData()
+                {
+                    FileName = _fileCB.Text,
+                    Date = _dateCB.SelectedValue != null ? (DateTime)_dateCB.SelectedValue : DateTime.Now
+                };
+                if((_fileCB.Text != null ) &&(_dateCB.SelectedValue != null))
+                    WasOk = true;
+                Close();
+            };
             Grid.SetColumn(_acceptButton, 0);
             Grid.SetRow(_acceptButton, 4);
 

@@ -14,7 +14,7 @@ namespace WritingManager.Module.MapManager
 
         event Action Add;
         event Action Load;
-        FileData LoadImage(List<FileData> imagesInDB);
+        (bool, FileData) LoadImage(List<FileData> imagesInDB);
         string AddImage();
         string NameImage(string baseName);
 

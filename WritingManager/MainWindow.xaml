@@ -15,7 +15,7 @@
             <MenuItem Header="Move to right" x:Name="_moveToRight"/>
             <MenuItem Header="Move to left" x:Name="_moveToLeft"/>
         </ToolBar>
-        <Grid x:Name="_grid" Margin="0" Background="#FFFFC7C7" Grid.Row="1">
+        <Grid x:Name="_grid" Margin="0" Background="#FF55AAF0" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -26,8 +26,12 @@
             </Grid.RowDefinitions>
             <ToolBar x:Name="_leftPanelToolbar" MinHeight="30" Grid.Column="0" Grid.Row="0"/>
             <ToolBar x:Name="_rightPanelToolbar" MinHeight="30" Grid.Column="1" Grid.Row="0"/>
-            <Grid x:Name="_leftPanel" Margin="0" Background="#FF973030" Grid.Row="1"/>
-            <Grid x:Name="_rightPanel" Margin="0" Background="#FFE67171" Grid.Column="1" Grid.Row="1"/>
+            <Grid x:Name="_leftPanel" Margin="0" Background="#FF55AAF0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid x:Name="_rightPanel" Margin="0" Background="#FF55AAF0" Grid.Column="1" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Window>

@@ -20,6 +20,9 @@ namespace WritingManager.Module.TextWriter
             ModuleName = "Text writer";
             _view = view;
             _dataConnection = dataConnection;
+            _view.Load += Load;
+            _view.Save += Save;
+            _view.SaveNew += SaveNew;
         }
 
         public void RegisterShortcuts(IList<Shortcut<PanelType>> shortcuts)
@@ -70,7 +73,9 @@ namespace WritingManager.Module.TextWriter
 
         private void Load()
         {
-            var choosenFile = _view.LoadFile(_dataConnection.GetDocumentNamesAndDates());
+            (var result, var choosenFile) = _view.LoadFile(_dataConnection.GetDocumentNamesAndDates());
+            if (!result)
+                return;
             if((choosenFile.FileName != "") && (choosenFile.Date != null))
             {
                 _view.Data = _dataConnection.GetDocument(choosenFile);
