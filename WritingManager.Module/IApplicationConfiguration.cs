@@ -9,6 +9,7 @@ namespace WritingManager.Module
     public interface IApplicationConfiguration
     {
         ApplicationType BuildTarget { get; set; }
+        string ConnectionString { get; set; }
     }
 
     [Flags]

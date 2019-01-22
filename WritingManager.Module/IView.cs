@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace WritingManager.Module
 {
-    public interface IDatabaseConnection
+    public interface IViewBase<PanelType>
     {
+        PanelType Panel { set; }
+        void Initialize();
+        void Show();
+        void Hide();
     }
 }

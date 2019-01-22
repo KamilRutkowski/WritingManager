@@ -13,7 +13,7 @@ namespace WritingManager.Module
 
     public class Shortcut<T>
     {
-        public (KeyboardFlags, char, ControllerBase<T>) TriggerOn { get; set; }
+        public (KeyboardFlags, char, IControllerBase<T>) TriggerOn { get; set; }
         public Action TriggeredAction { get; set; }
     }
 }

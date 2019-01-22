@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WritingManager.Module;
+using WritingManager.Module.CharactersManager;
+using WritingManager.Module.MapManager;
 using WritingManager.Module.TextWriter;
 
 namespace WritingManager.Controller
@@ -11,10 +13,13 @@ namespace WritingManager.Controller
     public class ApplicationConfiguration<PanelType>: IApplicationConfiguration
     {
         public ApplicationType BuildTarget { get; set; } = ApplicationType.WPF;
-        public List<(ModuleInfoBase<PanelType>, ModuleStatus)> RegisteredModulesInfoBases { get; set; } = new List<(ModuleInfoBase<PanelType>, ModuleStatus)>
+        public List<(IModuleInfoBase<PanelType>, ModuleStatus)> RegisteredModulesInfoBases { get; set; } = new List<(IModuleInfoBase<PanelType>, ModuleStatus)>
         {
-            (new TextWriterModuleInfo<PanelType>(), ModuleStatus.RightPanel | ModuleStatus.Active)
+            (new TextWriterModuleInfo<PanelType>(), ModuleStatus.LeftPanel | ModuleStatus.Active),
+            (new CharactersManagerModuleInfo<PanelType>(), ModuleStatus.RightPanel | ModuleStatus.Active),
+            (new MapManagerModuleInfo<PanelType>(), ModuleStatus.RightPanel)
         };
+        public string ConnectionString { get; set; }
     }
 
     [Flags]

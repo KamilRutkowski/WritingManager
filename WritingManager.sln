@@ -10,10 +10,22 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E097B940-8209-477B-BAE1-85C0BB20FD8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingManager.Module.TextWriter", "WritingManager.Module.TextWriter\WritingManager.Module.TextWriter.csproj", "{E8689C23-C4F9-4850-BB5D-904BF1F32049}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B479A4E-7A03-419D-A86E-3C0925D1351E} = {4B479A4E-7A03-419D-A86E-3C0925D1351E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingManager.Module.CharactersManager", "WritingManager.Module.CharactersManager\WritingManager.Module.CharactersManager.csproj", "{31BC229D-FA97-43F1-BA27-2034D6E2E95C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B479A4E-7A03-419D-A86E-3C0925D1351E} = {4B479A4E-7A03-419D-A86E-3C0925D1351E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingManager.Controller", "WritingManager.Controller\WritingManager.Controller.csproj", "{5A67CC64-3BFF-42E1-ADBB-4FCD068E3FC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingManager.WPF.Common.Dialogs", "WritingManager.WPF.Common.Dialogs\WritingManager.WPF.Common.Dialogs.csproj", "{B6D6EA59-4139-47C0-A856-96661D0F5803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseConnectorServiceWCF", "DatabaseConnectorServiceWCF\DatabaseConnectorServiceWCF.csproj", "{4B479A4E-7A03-419D-A86E-3C0925D1351E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingManager.Module.MapManager", "WritingManager.Module.MapManager\WritingManager.Module.MapManager.csproj", "{70F26016-8448-4CDE-9C9E-20C0F64426CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +53,18 @@ Global
 		{5A67CC64-3BFF-42E1-ADBB-4FCD068E3FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A67CC64-3BFF-42E1-ADBB-4FCD068E3FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A67CC64-3BFF-42E1-ADBB-4FCD068E3FC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D6EA59-4139-47C0-A856-96661D0F5803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D6EA59-4139-47C0-A856-96661D0F5803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D6EA59-4139-47C0-A856-96661D0F5803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D6EA59-4139-47C0-A856-96661D0F5803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B479A4E-7A03-419D-A86E-3C0925D1351E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B479A4E-7A03-419D-A86E-3C0925D1351E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B479A4E-7A03-419D-A86E-3C0925D1351E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B479A4E-7A03-419D-A86E-3C0925D1351E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E8689C23-C4F9-4850-BB5D-904BF1F32049} = {E097B940-8209-477B-BAE1-85C0BB20FD8C}
 		{31BC229D-FA97-43F1-BA27-2034D6E2E95C} = {E097B940-8209-477B-BAE1-85C0BB20FD8C}
+		{70F26016-8448-4CDE-9C9E-20C0F64426CA} = {E097B940-8209-477B-BAE1-85C0BB20FD8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {772BB917-FEF0-4BAA-9A6A-68FDC259980A}
